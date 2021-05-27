@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/hr.css">
+    <link rel="stylesheet" href="/style.css">
+
+    <title>Viewing <%= data.firstName %>'s Essay Answers</title>
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <img src="/images/crt_icon.png" alt="" class="nav_logo" draggable="false">
+        <a href="/hr/home" class="nav_content">Dashboard</a>
+        <a href="/hr/managedrivers" class="nav_content">Manage Drivers</a>
+        <a href="/hr/viewapplications" class="active nav_content">View Applications</a>
+        <a href="javascript:void(0);" style="font-size:30px;" class="icon" onclick="hamburger()">&#9776;</a>
+        <div class="drpdwn">
+            <button class="dropbtn"><%= user_name %>
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="drpdwn-content">
+                <a href="/hr/profile">Account Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div> 
+    </div>
+
+    <div class="outer-form">
+        <form id="form"  action="/applicationPost" method="post" role="form" enctype="multipart/form-data">
+            <h5 class="text-center part_type" id="part_type"><%=data.firstName%>'s Answers</h5> <!-- WILL CHANGED BY THE SCRIPT -->
+
+            <!-- ESSAY PART -->
+            <div class="form-group row ">
+                <div class="col">
+                    <div class="row">
+                        <!-- TITLE: ESSAY TEST -->
+                        <h3 class="text-center">English Essay</h3>
+                        <div class="col">
+                            <label for="">1. At your last job, how did you fill downtime?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer1" disabled><%=essay.englishAnswer1%></textarea>
+
+                            <label for="">2. Tell   me  about  your  last  performance  review.  What  was  mentioned about how you could improve? Any	 re-occurring  themes?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer2" disabled><%=essay.englishAnswer2%></textarea>
+
+                            <label for="">3. Which situations kept you from coming to work on time at your last job? How often did that occur?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer3" disabled><%=essay.englishAnswer3%></textarea>
+
+                            <label for="">4. Describe a recent problem you had with one of your manager’s decisions . How did you handle it?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer4" disabled><%=essay.englishAnswer4%></textarea>
+
+                            <label for="">5. What about your character makes you a good candidate for this job?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer5" disabled><%=essay.englishAnswer5%></textarea>
+
+                            <label for="">6. Priorities often change suddenly throughout  the day. If you are asked to quickly do another task,  how does that affect your mood? What if it’s the third time before noon?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer6" disabled><%=essay.englishAnswer6%></textarea>
+
+                            <label for="">7. What do you feel is an acceptable amount of days to be absent in a calendar year?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer7" disabled><%=essay.englishAnswer7%></textarea>
+
+                            <label for="">8. How do you handle situations that could cause you to be tardy or absent?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer8" disabled><%=essay.englishAnswer8%></textarea>
+
+                            <label for="">9. How have you  responded in the past when you found another employee was stealing?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer9" disabled><%=essay.englishAnswer9%></textarea>
+
+                            <label for="">10. 24/7 operations  are  like  relay  races  where  you  take  the baton, run with it and then pass it on smoothly. How do you make seamless  transitions on shift changes?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer10" disabled><%=essay.englishAnswer10%></textarea>
+
+                            <label for="">11. How have you responded in the past when your replacement calls in sick and a substitute will take over an  hour to come in?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer11" disabled><%=essay.englishAnswer11%></textarea>
+
+                            <label for="">12. During the last year, when your replacement hasn’t shown up and your manager asked you to stay late,  what percentage of the time have you stayed late?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer12" disabled><%=essay.englishAnswer12%></textarea>
+
+                            <label for="">13. Think about the last time your manager criticised your work, How did you respond?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer13" disabled><%=essay.englishAnswer13%></textarea>
+
+                            <label for="">14. Give an example of when you did something without being asked. Can you give me another example?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer14" disabled><%=essay.englishAnswer14%></textarea>
+
+                            <label for="">15. Tell me about your most frustrating experience as a driver, How did you handle it?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="englishAnswer15" disabled><%=essay.englishAnswer15%></textarea>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3 class="text-center">Filipino Essay</h3>
+                        <div class="col">
+                            <label for="">1. Anong paguugali ang iyong maipagmamalaki para tanggapin ka sa kumpanyang ito ng CRTI?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer1" disabled><%=essay.filipinoAnswer1%></textarea>
+
+                            <label for="">2. Sa huling employment mo, ano ang ginagawa mo sa mga oras na tapos na ang trabaho mo o kaya ay naghihintay ka sa client mo.</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer2" disabled><%=essay.filipinoAnswer2%></textarea>
+
+                            <label for="">3. Ano ang naging feedback sa iyo ng huling employer mo? Saang parte ng trabaho mo dapat kang magimprove?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer3" disabled><%=essay.filipinoAnswer3%></textarea>
+
+                            <label for="">4. Anong mga bagay ang nagiging dahilan ng iyong pagkahuli sa trabaho. Kung nangyayari ito, gaano kadalas?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer4" disabled><%=essay.filipinoAnswer4%></textarea>
+
+                            <label for="">5. Magbigay ka ng pinakahuling di magandang pangyayari na naganap sa pagitan mo at ng iyong huling employer. Ano ang ginawa mo para ito’y masolusyunan?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer5" disabled><%=essay.filipinoAnswer5%></textarea>
+
+                            <label for="">6. Ang mga prioridad sa trabaho ay maaaring magbago sa loob ng isang araw. Kung magiiba ang iyong schedule sa araw ding iyon, maaapektuhan ba nito ang iyong damdamin at kaisipan tungkol sa iyong trabaho? Paano kung 3 beses itong mangyari sa loob ng kalahating araw lamang?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer6" disabled><%=essay.filipinoAnswer6%></textarea>
+
+                            <label for="">7. Ano ang dapat mong gawin kung makita mo ang kapwa mo empleyado sa akto ng pagnanakaw?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer7" disabled><%=essay.filipinoAnswer7%></textarea>
+
+                            <label for="">8. Ang negosyo ng kumpanya ay puwedeng 24/7 operations, o 24 na oras araw-araw, sa loob ng 7 araw, at kailangan ang mabilisang pagkilos at madaliang pagsunod. Paano ka makakasunod sa kinakailangang sistema para madaling matapos ang kinakailangang trabaho?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer8" disabled><%=essay.filipinoAnswer8%></textarea>
+
+                            <label for="">9. Nasa sitwasyon kang kagagaling mo lamang sa pagseserbisyo sa isang kliyente. Paano ka magresponde sa isang tawag sa trabaho, para sa isang kliyente, kung ang papalit sa iyo sa oras na iyon ay biglaang nagkasakit at ang isa pang tinawagang papalit ay aabutin ng isang oras para makarating sa lugar kung saan nandoon ang kliyente.</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer9" disabled><%=essay.filipinoAnswer9%></textarea>
+
+                            <label for="">10. Noong nakaraang taon at di dumating ang iyong karelyebo, inatasan ka ng iyong Supervisor na maghintay, gaano ang pinakamatagal na oras o minutong iyong ipinaghintay?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer10" disabled><%=essay.filipinoAnswer10%></textarea>
+
+                            <label for="">11. Kailan ang huling pagkakataon na binigyan ka ng feedback ng iyong Superior, tungkol sa iyong trabaho. Ano ang naging reaksyon mo?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer11" disabled><%=essay.filipinoAnswer11%></textarea>
+
+                            <label for="">12. Magbigay ka ng dalawa o tatlong halimbawa ng mga pagkakataong gumawa ka ng mga bagay na di na kailangang pagutusan, at ano ang naging bunga nito.</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer12" disabled><%=essay.filipinoAnswer12%></textarea>
+
+                            <label for="">13. Magbigay ka ng isang nakapanlulumong pangyayari sa buhay mo bilang isang driver, at paano mo ito hinarap o tinanggap?</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Write your answer here..." name="filipinoAnswer13" disabled><%=essay.filipinoAnswer13%></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- BUTTONS -->
+
+            <div style="overflow:auto;">                
+               <!--  <div style="float:right;">              
+                    <button type="button" id="prevBtn" class="btn-back" onclick="nextPrev(-1); topFunction();">&larr; BACK </button>
+                    <button type="button" id="nextBtn" class="btn-submit" onclick="nextPrev(1); topFunction()">NEXT &rarr;</button>
+                </div> -->
+            </div>
+        </form> 
+    </div>
+    <script>
+    function hamburger() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    </script>
+    <script src="/script.js"></script>
+</body>
+</html>

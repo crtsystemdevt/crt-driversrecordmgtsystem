@@ -1,0 +1,115 @@
+html, body{
+    height: 100%;
+    width: 100%;
+
+    background-image: url("images/login_bg.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+form{
+    width: 40vh;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(219,214,214, 0.8);
+    border-radius: 10px;
+    padding: 4vh;
+    background-color: white;
+    text-align: center;
+    padding-top: 5vh;
+    margin-right: 5vh;
+}
+
+.text_box{
+    margin-bottom: 5vh;
+}
+
+.container-fluid{
+    height: 100%;
+}
+
+.row{
+    height: 100%;
+}
+
+.top-left{
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-align: center;
+}
+
+.home_title{
+    text-align: center;
+    font-size: 2vh;
+    font-family: 'Metrophobic', sans-serif;
+    color: white;
+    text-shadow: 1px 1px #786e6e;
+    margin-top: 3vh;
+}
+
+.bottom-right{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: auto;
+    /* border: solid 1px black; */
+}
+
+.home_logo{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.login_btn{
+    width: 100%;
+    background-color: #4047B3;
+    color: white;
+    border-radius: 5px;
+    padding: 7px;
+    border: none;
+}
+
+.forgot_password{
+    color: blue;
+    margin-top: 20px;
+    font-size: small;
+}
+
+/* @media(max-width: 758px){
+    .home_logo{
+        border-bottom: solid 1px black;
+        border-right: none;
+    }
+} */
+
+@media(max-width: 414px){
+    .home_logo{
+        height: auto;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        border-right: none;
+        /* border-bottom: solid 1px black; */
+    }
+
+    .home_title{
+        text-align: center;
+        font-size: 2.5vh;
+    }
+
+    form{
+        width: 100%;
+    }
+}
+
+.alertMsg{
+    color: red;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+

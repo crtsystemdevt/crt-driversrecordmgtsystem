@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/profile.css">
+    <!-- <link rel="stylesheet" href="/hr.css"> -->    
+    <title>My Profile</title>
+
+    <style>
+        body {
+            margin: 0;
+            background-color: #EEEEEE;
+        }
+        </style>
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <img src="/images/crt_icon.png" alt="" class="nav_logo" draggable="false">
+        <a href="/hr/home" class="active nav_content">Dashboard</a>
+        <a href="/hr/managedrivers" class="nav_content">Manage Drivers</a>
+        <a href="/hr/viewapplications" class="nav_content">View Applications</a>
+        <a href="javascript:void(0);" style="font-size:30px;" class="icon" onclick="hamburger()">&#9776;</a>
+        <div class="drpdwn">
+            <button class="dropbtn"><%= data.username %>
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="drpdwn-content">
+                <a href="#">Account Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div> 
+    </div>
+    
+    <div class="content">
+        <form id="form" action="/hr/updatehr" method="post" role="form">
+            <h3 class="part_type">YOUR PERSONAL DETAILS</h3>
+            <div class="form-group row">                
+                <div class="col-lg-6">
+                    <label for="">First Name</label> <label class="required">*</label>
+                    <input class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="firstName" placeholder="First name" name="firstName" onkeypress="return isName(event)" oncopy="return false" onpaste="return false" value="<%= data.emp_fname %>"  >
+                    
+                    <label for="">Last Name</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="lastName" placeholder="Last Name" name="lastName" onkeypress="return isName(event)" oncopy="return false" onpaste="return false" value="<%= data.emp_lname %>"  >
+                </div>
+                
+                <div class="col-lg-6">
+                    <label for="">Personal contact number</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="11" oninput="this.className='form-control text_box requiredInput'" oncopy="return false" onpaste="return false"  onkeypress="return isNumber(event)" pattern="^[0-9]*$" placeholder="Personal contact number" name="personalNumber" oncopy="return false" onpaste="return false" value="<%= data.emp_personal_num %>"  >
+                </div>
+            </div>
+            <!-- ACCOUNT DETAILS -->
+            <h3 class="part_type">YOUR ACCOUNT DETAILS</h3>
+
+            <div class="row form-group">
+                <div class="col-lg-6">
+                    <label for="">Username</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="20" oninput="this.className='form-control text_box requiredInput'" id="username" placeholder="Username" name="username" onkeypress="return isUserName(event)" oncopy="return false" onpaste="return false" value="<%= data.username %>" disabled>
+                    <!-- BUTTON PARA MAGPOPUP -->
+                    <changePass class="form-control w-50 btn-dark btn" data-toggle="modal" data-target="#exampleModal">Change Password</changePass>
+                </div>
+
+                <div class="col-lg-6">
+                    <label for="">Email Address</label> <label class="required">*</label>
+                    <input type="email" class="form-control text_box requiredInput" maxlength="40" oninput="this.className='form-control text_box requiredInput'" id="email" placeholder="Email address" name="emailAddress" value="<%= data.emp_email %>" required disabled>
+                </div>
+            </div>
+            <div class="alert alert-danger" id="username-alert" style="margin: 60px;" role="alert">
+                Username already exists!
+            </div>
+            <div class="alert alert-danger" id="username-info" style="margin: 60px;" role="alert">
+                Username must consists of 8 - 20 characters!
+            </div>
+        
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="button" id="prevBtn" class="btn-danger" onclick="discard()">DISCARD</button>
+                    <button type="button" id="nextBtn" class="btn-submit" onclick="submitForm()">SAVE</button>
+                </div>
+            </div>
+        </form> 
+
+        <div class="col-lg-12">           
+            <form action="/admin/updatepassword" id="changePasswordForm" method="POST">
+            <!-- ACTUAL MODAL -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                    </div>
+                    <div class="modal-body">
+                        <!-- <label for="">Current Password</label> <label class="required">*</label>
+                        <input type="password" id="current-password" class="form-control" style="margin-bottom: 20px;" onkeyup="newPasswords()" maxlength="15" oncopy="return false" onpaste="return false"> -->
+  
+                        <label for="">New Password</label> <label class="required">*</label>
+                        <input type="password" class="form-control" id="new-password" style="margin-bottom: 20px;" onkeyup="newPasswords()" maxlength="15" name="newpassword" oncopy="return false" onpaste="return false">
+                        <label for="">Confirm New Password</label> <label class="required">*</label>
+                        <input type="password" class="form-control" id="confirm-new-password" style="margin-bottom: 20px;" onkeyup="newPasswords()" maxlength="15" oncopy="return false" onpaste="return false">
+  
+                        <!-- VALIDATION -->
+                      <!-- <div class="alert alert-danger" id="current-password-info" style="margin-left: 60px; margin-right: 60px; margin-top: 0;" role="alert">
+                          Current password is incorrect
+                      </div> -->
+                      <div class="alert alert-danger" id="new-password-info" style="margin-left: 60px; margin-right: 60px; margin-top: 0;" role="alert">
+                          Password didn't match
+                      </div>
+                      <div class="alert alert-danger" id="password-info" style="margin-left: 60px; margin-right: 60px; margin-top: 0;" role="alert">
+                          New Password must consist of 8 - 15 characters
+                      </div>    
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" id="confirmPassword" onclick="changePassword()">Confirm</button>
+                    </div>
+                  </div>
+                </div>
+            </div>
+            </form>          
+      </div>
+    </div>
+</body>
+<script>
+    //NEW PASSWORD VALIDATION
+    //GET RAW PASSWORD(HASH) THEN CONVERT INSERTED PASSWORD TO HASH AND COMPARE BOTH
+    //document.getElementById("current-password-info").style.display = "none";
+    document.getElementById("new-password-info").style.display = "none";
+    document.getElementById("password-info").style.display = "none";
+    document.getElementById("confirmPassword").disabled = true;
+    rawPassword = '<%= data.password %>';
+
+    function changePassword(){
+        //currentPassword = document.getElementById("current-password").value;
+        newPassword = document.getElementById("new-password").value;
+        confirmNewPassword = document.getElementById("confirm-new-password").value;
+        //CONFIRM PASSWORD
+        //MATCHING
+        if(newPassword == confirmNewPassword && newPassword.length != 0){
+            document.getElementById("new-password-info").style.display = "none";
+        } else{
+            document.getElementById("new-password-info").style.display = "block";
+        }
+
+        //FORMATTING
+        if(newPassword.length < 8){
+            document.getElementById("password-info").style.display = "block";
+        } else if( newPassword.length >= 8 && newPassword == confirmNewPassword && newPassword.length != 0 && confirmNewPassword.length != 0){
+            var submitAlert = confirm("WARNING. CHANGES MADE WILL BE SAVED");
+            if(submitAlert == true){
+                document.getElementById("changePasswordForm").submit();
+            }
+        }
+        /* sha256(currentPassword).then(function(digest) {
+            if(digest == rawPassword){
+                document.getElementById("current-password-info").style.display = "none";
+            } else{
+                document.getElementById("current-password-info").style.display = "block";
+            }
+
+            //CONFIRM PASSWORD
+            //MATCHING
+            if(newPassword == confirmNewPassword && newPassword.length != 0 && confirmNewPassword.length != 0){
+                document.getElementById("new-password-info").style.display = "none";
+            } else{
+                document.getElementById("new-password-info").style.display = "block";
+            }
+
+            //FORMATTING
+            if(newPassword.length < 8){
+                document.getElementById("password-info").style.display = "block";
+            } else if( newPassword.length >= 8 && digest == rawPassword && newPassword == confirmNewPassword && newPassword.length != 0 && confirmNewPassword.length != 0){
+                var submitAlert = confirm("WARNING. CHANGES MADE WILL BE SAVED");
+                if(submitAlert == true){
+                    document.getElementById("changePasswordForm").submit();
+                }
+            }
+        }) */
+    }
+
+    function newPasswords(){        
+        //let currentPassword = document.getElementById("current-password").value;                   
+        let newPassword = document.getElementById("new-password").value;
+        let confirmNewPassword = document.getElementById("confirm-new-password").value;
+        if(newPassword.length == 0 || confirmNewPassword.length == 0/*  || currentPassword.length == 0 */){
+            document.getElementById("confirmPassword").disabled = true;
+        } else if(newPassword.length != 0 && confirmNewPassword.length != 0/*  && currentPassword.length != 0 */){
+            document.getElementById("confirmPassword").disabled = false;
+        }
+    }
+
+    /* function sha256(str) {
+    // Get the string as arraybuffer.
+    var buffer = new TextEncoder("utf-8").encode(str)
+    return crypto.subtle.digest("SHA-256", buffer).then(function(hash) {
+        return hex(hash)
+    })
+    }
+
+    function hex(buffer) {
+    var digest = ''
+    var view = new DataView(buffer)
+    for(var i = 0; i < view.byteLength; i += 4) {
+        // We use getUint32 to reduce the number of iterations (notice the `i += 4`)
+        var value = view.getUint32(i)
+        // toString(16) will transform the integer into the corresponding hex string
+        // but will remove any initial "0"
+        var stringValue = value.toString(16)
+        // One Uint32 element is 4 bytes or 8 hex chars (it would also work with 4
+        // chars for Uint16 and 2 chars for Uint8)
+        var padding = '00000000'
+        var paddedValue = (padding + stringValue).slice(-padding.length)
+        digest += paddedValue
+    }
+    
+    return digest
+    } */
+
+    // Should output "c3ab8ff13720e8ad9047dd39466b3c8974e592c2fa383d4a3960714caef0c4f2"
+    // We can check the result with:
+    // python -c 'from hashlib import sha256;print sha256("foobar").hexdigest()'
+</script>
+<script>
+    document.getElementById("username-alert").style.display = "none";
+    document.getElementById("username-info").style.display = "none";
+    function submitForm(){ 
+        var submitAlert = confirm("WARNING. CHANGES MADE WILL BE SAVED");
+        if(submitAlert == true){
+            if(!validateForm()){
+            //HIGHLIGHT FIELDS
+            topFunction();
+            } else{
+                document.getElementById("form").submit();
+            }
+        }
+    }
+
+    function hamburger() {
+        var x = document.getElementById("myTopnav");
+        if (x.className === "topnav") {
+            x.className += " responsive";
+        } else {
+            x.className = "topnav";
+        }
+    }
+
+    function discard() {
+        var discardAlert = confirm("WARNING. CHANGES MADE WILL NOT BE SAVED!");
+        if (discardAlert == true) {
+            window.location='/admin/home'
+        }
+    }
+    
+    var currentTab = 0; 
+    showTab(currentTab);
+
+    function showTab(n) {
+    
+        var x = document.getElementsByClassName("outer-form");
+        //BUTTONS
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").innerHTML = "SAVE";
+        }
+    }
+
+    function validateForm() { 
+        var x, y, i, valid = true;
+        y = document.getElementsByClassName("requiredInput");
+        for (i = 0; i < y.length; i++) {
+            if (y[i].value == "") {
+                y[i].className += " invalid";
+                valid = false;
+            }
+        }
+
+        if(document.getElementById("username").value.length < 8){
+            document.getElementById("username-info").style.display = "";
+            valid = false;
+        } else{
+            document.getElementById("username-info").style.display = "none";
+        }
+
+        return valid;
+    }
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+    function isNumber(evt){
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+    function isName(e){
+    try {
+        if (window.event) {
+            var charCode = window.event.keyCode;
+        }
+        else if (e) {
+            var charCode = e.which;
+        }
+        else { return true; }
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode == 32))
+            return true;
+        else
+            return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+    function isUserName(e){
+    try {
+        if (window.event) {
+            var charCode = window.event.keyCode;
+        }
+        else if (e) {
+            var charCode = e.which;
+        }
+        else { return true; }
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || (charCode >= 48 && charCode <= 57) || (charCode >= 96 && charCode <= 105))
+            return true;
+        else
+            return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+</script>
+</html>

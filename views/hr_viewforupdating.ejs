@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/hr.css">
+    <link rel="stylesheet" href="/style.css">
+
+    <title>Viewing <%= data.firstName %>'s Application</title>
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <img src="/images/crt_icon.png" alt="" class="nav_logo" draggable="false">
+        <a href="/hr/home" class="nav_content">Dashboard</a>
+        <a href="/hr/managedrivers" class="nav_content">Manage Drivers</a>
+        <a href="/hr/viewapplications" class="active nav_content">View Applications</a>
+        <a href="javascript:void(0);" style="font-size:30px;" class="icon" onclick="hamburger()">&#9776;</a>
+        <div class="drpdwn">
+            <button class="dropbtn"><%= user_name %>
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="drpdwn-content">
+                <a href="/hr/profile">Account Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div> 
+    </div>
+    <div class="outer-form">
+        <form id="form" action="/hr/addDriver/<%=data.applicationID%>" method="post" role="form" enctype="multipart/form-data">
+            
+
+            <!-- PERSONAL DATA -->
+            <h3 class="text-center part_type" id="part_type">INFORMATION SHEET</h3>
+            <div class="form-group row ">
+                
+                <h3>Personal Information</h3>
+                <div class="col-lg-6">
+                    <label for="">First Name</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box" id="" placeholder="" name="firstName" value="<%= data.firstName %>" disabled>
+                    <label for="">Middle Name</label>
+                    <input type="text" class="form-control text_box" id="" placeholder="" name="middleName" value="<%= data.middleName %> " disabled>
+                    <label for="">Last Name</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box" id="" placeholder="" name="lastName" value="<%= data.lastName %> " disabled>
+                    <label for="">Nickname</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box" id="" placeholder="" name="nickname" value="<%= data.nickname %> " disabled>
+                    <label for="" name="sex">Sex</label> <label class="required">*</label>
+                    <!-- <select class="form-select text_box" name="sex" id="sex" disabled>
+                        <option value="male" name="male">Male</option>
+                        <option value="female" name="female">Female</option>
+                    </select> -->
+                    <input type="text" class="form-control text_box" id="" placeholder="" name="nickname" value="<%= data.sex %>" disabled>
+                    <label for="">Home Address</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box" id="" placeholder="" name="homeAddress" value="<%= data.homeAddress %>" disabled>
+                    <label for="">Birthdate</label> <label class="required">*</label>
+                    <input type="date" class="form-control text_box" id="" placeholder="" name="birthdate" value="<%= data.birthdate %>" disabled>
+
+                    <label for="">Location</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box" id="" placeholder="" name="nickname" value="<%= data.location %>" disabled>
+                </div>
+                
+                <div class="col-lg-6">
+                    <label for="">Personal contact number</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box" id="" placeholder="" name="personalNumber" value="<%= data.personalNumber %>" disabled>
+                    <label for="">Email Address</label> <label class="required">*</label>
+                    <input type="email" class="form-control text_box" id="" placeholder="" name="emailAddress" value="<%= data.emailAddress %>" disabled>
+                    <label for="">Contact person in case of emergency</label> <label class="required">*</label>
+                    <input type="email" class="form-control text_box" id="" placeholder="" name="contactPerson_Name" value="<%= data.contactPerson_Name %>" disabled>
+                    <label for="">Contact person's mobile number</label> <label class="required">*</label>
+                    <input type="email" class="form-control text_box" id="" placeholder="" name="contactPerson_Number" value="<%= data.contactPerson_Number %>" disabled>
+                    <label for="">Relationship to the contact person</label> <label class="required">*</label>
+                    <input type="email" class="form-control text_box" id="" placeholder="" name="contactPerson_Relationship" value="<%= data.contactPerson_Relationship %>" disabled>
+                    <label for="">Blood type</label>
+                    <input type="email" class="form-control text_box" id="" placeholder="" name="bloodType" value="<%= data.bloodType %>" disabled>
+                    <label for="">Religion</label>
+                    <input type="email" class="form-control text_box" id="" placeholder="" name="religion" value="<%= data.religion %>" disabled>
+                    <label for="">Civil status</label> <label class="required">*</label>
+                    <input type="email" class="form-control text_box" id="" placeholder="" name="civilStatus" value="<%= data.civilStatus %>" disabled>
+                    <label for="">Height and Weight</label>
+                    <div class="input-group">                        
+                        <text id="addon">H</text>
+                        <input id="" type="text" class="form-control hw" placeholder="" name="height" value="<%= data.height %>" disabled>
+
+                        <text id="addon">W</text>
+                        <input id="" type="text" class="form-control" placeholder="" name="weight" value="<%= data.weight %>" disabled>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDUCATIONAL BACKGROUND -->
+            <h3 class="text-center part_type" id="part_type">EDUCATIONAL BACKGROUND</h3>
+            <div class="form-group row ">
+                <div class="col">
+                    <div class="row">
+                        <h3>Elementary</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="e_schoolName" value="<%=educational.e_schoolName%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="e_from" value="<%=educational.e_from%>" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="e_to" value="<%=educational.e_to%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="e_awards" value="<%=educational.e_awards%>" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Secondary</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label> <label class="required">*</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="s_schoolName" value="<%=educational.s_schoolName%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label> <label class="required">*</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="s_from" value="<%=educational.s_from%>" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="s_to" value="<%=educational.s_to%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="s_awards" value="<%=educational.s_awards%>" disabled>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="row">
+                        <h3>Collegiate</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="c_schoolName" value="<%=educational.c_schoolName%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="c_from" value="<%=educational.c_from%>" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="c_to" value="<%=educational.c_to%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="c_awards" value="<%=educational.c_awards%>" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Masteral Degree</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="m_schoolName" value="<%=educational.m_schoolName%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="m_from" value="<%=educational.m_from%>" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="m_to" value="<%=educational.m_to%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="m_awards" value="<%=educational.m_awards%>" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Others</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="o_schoolName" value="<%=educational.o_schoolName%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="o_from" value="<%=educational.o_from%>" disabled>
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="o_to" value="<%=educational.o_to%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="o_awards" value="<%=educational.o_awards%>" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Special skills and abilities</h3>
+                        <div class="col-lg-10">
+                            <label for="">Other hobbies or skills</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="specialSkills" value="<%=educational.specialSkills%>" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WORK EXPERIENCE -->
+            <h3 class="text-center part_type" id="part_type">WORK EXPERIENCE</h3>
+            <div class="form-group row ">
+                <div class="col">
+                    <div class="row">
+                        <h3>Work #1</h3>
+                        <div class="col-lg-8">
+                            <label for="">Employers and Address</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workEmployer1" value="<%=work.workEmployer1%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Company Tel.#</label>
+                            <input type="email" class="form-control text_box" id="" placeholder="" name="workNumber1" value="<%=work.workNumber1%>" disabled>
+                        </div>                
+                        <div class="col-lg-3">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="workFrom1" value="<%=work.workFrom1%>" disabled>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="workTo1" value="<%=work.workTo1%>" disabled>
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">Position held</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workPosition1" value="<%=work.workPosition1%>" disabled>
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Reason for leaving</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workReasonForLeaving1" value="<%=work.workReasonForLeaving1%>" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Work #2</h3>
+                        <div class="col-lg-8">
+                            <label for="">Employers and Address</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workEmployer2" value="<%=work.workEmployer2%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workNumber2" value="<%=work.workNumber2%>" disabled>
+                        </div>                
+                        <div class="col-lg-3">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workFrom2" value="<%=work.workFrom2%>" disabled>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workTo2" value="<%=work.workTo2%>" disabled>
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">Position held</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workPosition2" value="<%=work.workPosition2%>" disabled>
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Reason for leaving</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workReasonForLeaving2" value="<%=work.workReasonForLeaving2%>" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Work #3</h3>
+                        <div class="col-lg-8">
+                            <label for="">Employers and Address</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workEmployer3" value="<%=work.workEmployer3%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workNumber3" value="<%=work.workNumber3%>" disabled>
+                        </div>                
+                        <div class="col-lg-3">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workFrom3" value="<%=work.workFrom3%>" disabled>
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workTo3" value="<%=work.workTo3%>" disabled>
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">Position held</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workPosition3" value="<%=work.workPosition3%>" disabled>
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Reason for leaving</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="workReasonForLeaving3" value="<%=work.workReasonForLeaving3%>" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAMILY BACKGROUND -->
+            <h3 class="text-center part_type" id="part_type">FAMILY BACKGROUND</h3>
+            <div class="form-group row ">
+                <div class="col">
+                    <div class="row">
+                        <h3>Parents</h3>
+                        <div class="col-lg-6">
+                            <label for="">Father's name</label> <label class="required">*</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="father_name" value="<%=family.father_name%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="father_companyNumber" value="<%=family.father_companyNumber%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label> <label class="required">*</label>
+                            <input type="date" class="form-control text_box" id="" placeholder="" name="father_birthdate" value="<%=family.father_birthdate%>" disabled>
+                        </div>                    
+                        <div class="col-lg-8">
+                            <label for="">Occupation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="father_occupation" value="<%=family.father_occupation%>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Mother's name</label> <label class="required">*</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="mother_name" value="<%=family.mother_name%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="mother_companyNumber" value="<%=family.mother_companyNumber%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label> <label class="required">*</label>
+                            <input type="date" class="form-control text_box" id="" placeholder="" name="mother_birthdate" value="<%=family.mother_birthdate%>" disabled>
+                        </div>                    
+                        <div class="col-lg-8">
+                            <label for="">Occupation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="mother_occupation" value="<%=family.mother_occupation%>" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Sibling/s</h3>
+                        <div class="col-lg-6">
+                            <label for="">1. Brother/Sister's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="sibling_name1" value="<%=family.sibling_name1%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="sibling_companyNumber1" value="<%=family.sibling_companyNumber1%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label>
+                            <input type="date" class="form-control text_box" id="" placeholder="" name="sibling_birthdate1" value="<%=family.sibling_birthdate1%>" disabled>
+                        </div>                    
+                        <div class="col-lg-8">
+                            <label for="">Occupation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="sibling_occupation1" value="<%=family.sibling_occupation1%>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">2. Brother/Sister's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="sibling_name2" value="<%=family.sibling_name2%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="sibling_companyNumber2" value="<%=family.sibling_companyNumber2%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label>
+                            <input type="date" class="form-control text_box" id="" placeholder="" name="sibling_birthdate2" value="<%=family.sibling_birhtdate2%>" disabled>
+                        </div>                    
+                        <div class="col-lg-8">
+                            <label for="">Occupation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="sibling_occupation2" value="<%=family.sibling_occupation2%>" disabled>
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="row">
+                        <h3>Children</h3>
+                        <div class="col-lg-8">
+                            <label for="">1. Child's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="children_name1" value="<%=family.children_name1%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label>
+                            <input type="date" class="form-control text_box" id="" placeholder="" name="children_birthdate1" value="<%=family.children_birthdate1%>" disabled>
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">2. Child's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="children_name2" value="<%=family.children_name2%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label>
+                            <input type="date" class="form-control text_box" id="" placeholder="" name="children_birthdate2" value="<%=family.children_birthdate2%>" disabled>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Person/s working at CRTI known to you.</h3>
+                        <div class="col-lg-8">
+                            <label for="">1. Person's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="personcrt_name1" value="<%=family.personcrt_name1%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Relation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="personcrt_relationship1" value="<%=family.personcrt_relationship1%>" disabled>
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">2. Person's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="personcrt_name2" value="<%=family.personcrt_name2%>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Relation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="personcrt_relationship2" value="<%=family.person_relationship2%>" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LICENSES -->
+            <h3 class="text-center part_type" id="part_type">LICENSE</h3>
+            <div class="form-group row ">
+                <div class="col">
+                    <div class="row">
+                        <h3>License</h3>
+                        <div class="col-lg-8">
+                            <label for="">License Number</label> <label class="required">*</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="License Number" name="licenseNumber1" value="<%=license.licenseNumber1%>" disabled>
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <label for="">Expiry Date</label> <label class="required">*</label>
+                            <input type="date" class="form-control text_box" id="" placeholder="Expiry Date" name="licenseExpiry1" value="<%=license.licenseExpiry1%>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Rating</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Rating" name="licenseRating1" value="<%=license.licenseRating1%>" disabled>
+                        </div>                    
+                        <div class="col-lg-6">
+                            <label for="">Remarks</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Remarks" name="licenseRemarks1" value="<%=license.licenseRemarks1%>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Type of License</label> <br>
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="nickname" value="<%= license.licenseType1 %>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Restriction</label> <br>  
+                            <input type="text" class="form-control text_box" id="" placeholder="" name="nickname" value="<%= restriction1 %>" disabled>
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Scanned Driver's License</label> <label class="required">*</label>
+                            <a href="/hr/license1/<%=license.license_ID%>" class="form-control" target="_blank">View License</a>
+                        </div>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            <!-- ATTACHMENTS -->
+            <h3 class="text-center part_type" id="part_type">ATTACHMENTS</h3>
+            <div class="form-group row ">
+                <div class="col">
+                    <div class="row">
+                        <h3>Profile Photo</h3>
+                        <div class="col-lg-12">
+                            <label for="">Profile photo</label> <br>
+                            <img class="profile-img" id="blah" src="data:image;base64,<%= profile_photo %>" alt="Image not found" />
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>ID's and other</h3>
+                        <div class="col-lg-6">
+                            <label for="">1. SSS number</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="sss_number" value="<%= documents.sss_number %>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Scanned SSS ID</label>
+                            <a href="/hr/sss/<%=documents.documents_ID%>" class="form-control" target="_blank">View SSS ID</a>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="">2. Pag-IBIG</label>
+                            <input type="text" class="form-control text_box" placeholder="Pag-IBIG ID number" name="pagibig_number" value="<%= documents.pagibig_number %>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Scanned Pag-IBIG ID</label>
+                            <a href="/hr/pagibig/<%=documents.documents_ID%>" class="form-control" target="_blank">View Pag-IBIG ID</a>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="">3. TIN number</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="tin_number"value="<%= documents.tin_number %>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Scanned TIN ID</label>
+                            <a href="/hr/tin/<%=documents.documents_ID%>" class="form-control" target="_blank">View TIN ID</a>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="">4. PhilHealth ID</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="philhealth_number" value="<%= documents.philhealth_number%>" disabled>
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Scanned PhilHealth ID</label>
+                            <a href="/hr/philhealth/<%=documents.documents_ID%>" class="form-control" target="_blank">View PhilHealth ID</a>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <label for="">5. MDR</label>
+                            <a href="/hr/mdr/<%=documents.documents_ID%>" class="form-control" target="_blank">View MDR ID</a>
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">6. NBI Clearance</label>
+                            <a href="/hr/nbi/<%=documents.documents_ID%>" class="form-control" target="_blank">View NBI Clearance</a>
+                        </div>                    
+                        <div class="col-lg-8">
+                            <label for="">7. Brgy. Clearance</label>
+                            <a href="/hr/brgyclearance/<%=documents.documents_ID%>" class="form-control" target="_blank">View Brgy. Clearance</a>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Socials</h3>
+                        <div class="col-lg-8">
+                            <label for="">Facebook</label> <br>
+                            <input type="text" class="form-control text_box" placeholder="" name="facebook" value="<%=documents.facebook%>" id="facebook" disabled>
+                            <label for="">Viber</label>
+                            <input type="text" class="form-control text_box" placeholder="" name="viber" value="<%=documents.viber%>" disabled>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <label for="">Date of Application</label>
+                            <input type="date" class="form-control text_box" value="<%=data.application_date%>" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br>
+            
+            <div style="overflow:auto;">
+                <div style="float:right;">
+                    <button type="submit" id="nextBtn" class="btn-submit" onclick="return confirm('THIS ACTION WILL MAKE THE APPLICANT AS A DRIVER')">ADD AS DRIVER</button>
+                </div>
+            </div>
+        </form> 
+    </div>
+    <script>
+        function hamburger() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }
+
+        function reject() {
+            var rejectAlert = confirm("ARE YOU SURE YOU WANT TO REJECT APPLICANT?");
+            if (rejectAlert == true) {
+                window.location='/hr/rejectapplicant/<%=data.applicationID %>'
+            }
+        }
+
+        function addDriver() {
+            var rejectAlert = confirm("THIS ACTION WILL REDIRECT YOU TO A FORM WHERE YOU CAN ADD THIS APPLICANT AS A NEW DRIVER");
+            if (rejectAlert == true) {
+                window.location='/hr/addDriverFromInterview/<%=data.applicationID %>'
+            }
+        }
+    </script>
+</body>
+</html>

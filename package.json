@@ -1,0 +1,37 @@
+{
+  "name": "02-Driver_Management_System",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^3.2.0",
+    "asynch": "^0.5.2",
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1",
+    "express-flash": "0.0.2",
+    "express-handlebars": "^5.2.1",
+    "express-session": "^1.17.1",
+    "fast-csv": "^4.3.6",
+    "memorystore": "^1.6.4",
+    "method-override": "^3.0.0",
+    "mysql2": "^2.2.5",
+    "nodemailer": "^6.6.0",
+    "nodemailer-sendinblue-transport": "^1.2.3",
+    "nodemon": "^2.0.7",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7"
+  }
+}

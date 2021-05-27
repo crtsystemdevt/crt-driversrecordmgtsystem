@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../header.css">
+    <link rel="stylesheet" href="../admin.css">
+
+    <title>Manage Users</title>
+
+    <style>
+        html, body{
+            background-color: #EEEEEE;
+        }
+
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: white;
+            height: 450px;
+            overflow: auto;
+        }
+
+        .dark{
+            background-color: #4047B3;
+            color: white;
+        }
+
+        .search{
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-addnewdriver{
+            float: right;
+            background-color: #4047B3;
+            font-size: 120%;
+            color: white;
+            border-radius: 5px;
+            border: solid 2px #C5B8B8;
+            padding: 0.5vh;
+            padding-left: 2vh;
+            padding-right: 2vh;
+            transition-duration: 0.4s;
+            margin-top: 10px;
+            width: auto;
+        }
+
+        .filter_group{
+            float: left;
+        }
+
+        #driverNames{
+            float: right;
+            width: 300px;
+        }
+        #drivertable{
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <img src="/images/crt_icon.png" alt="" class="nav_logo" draggable="false">
+        <a href="/admin/home" class="active nav_content">Manage Users</a>
+        <a href="javascript:void(0);" style="font-size:30px;" class="icon" onclick="hamburger()">&#9776;</a>
+        <div class="drpdwn">
+            <button class="dropbtn"><%= Name %>
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="drpdwn-content">
+                <a href="/admin/profile">Account Settings</a>
+                <a href="/logout">Logout</a>
+            </div>
+        </div> 
+    </div>
+     
+    <div class="container">
+        <div class="row h-100">     
+            <div class="col-lg-12">
+                <input type="text" id="driverNames" onkeyup='search();' placeholder="Search user" class="form-control search"> 
+            </div>
+            
+              <div class="col-lg-12 h-100">
+                
+                    <div id="forChecking" class="tabcontent">
+                
+                        <table class="table table-hover" id="drivertable">
+                            <thead class="dark">
+                                <th>Name</th>
+                                <th>Username</th>
+                            </thead>
+                            
+                            <% if(data.length!=0){ var i=1;
+                                data.forEach(function(data){ %>
+                            <tr class="items" onclick="window.location='/admin/viewaccount/<%=data.user_ID %>'">
+                                <td><%=data.emp_fname%> <%=data.emp_lname%></td>
+                                <td><%=data.username %></td>
+                            </tr>
+                            <% i++; }) %> <% } %>
+                        </table>
+                    </div>
+                  <button class="btn-addnewdriver" onclick="window.location='/admin/new_user'"> ADD NEW USER </button>
+              </div>
+        </div>
+    </div>
+   
+
+    <script>
+        /* window.onload= filterStatus(); */
+        function hamburger() {
+            var x = document.getElementById("myTopnav");
+            if (x.className === "topnav") {
+                x.className += " responsive";
+            } else {
+                x.className = "topnav";
+            }
+        }/* 
+        function filterStatus() {
+            //if checkbox is checked, filter list continue,
+            let filterStatus = [];
+
+            //let driverarray = '<%= account_type %>';
+
+            if(document.getElementById("ds1").checked == true){
+                filterStatus.push('1');
+            }
+            if(document.getElementById("ds2").checked == true){
+                filterStatus.push('2');
+            }
+
+
+            //REMOVE FROM FILTER
+            if(document.getElementById("ds1").checked == false){
+                filterStatus = arrayRemove(filterStatus, 1);
+            }
+            if(document.getElementById("ds2").checked == false){
+                filterStatus = arrayRemove(filterStatus, 2);
+            }
+
+            if(document.getElementById("ds1").checked == false && document.getElementById("ds1").checked == false && document.getElementById("ds2").checked == false){
+                filterStatus = arrayRemove(filterStatus, 1);
+                filterStatus = arrayRemove(filterStatus, 2);
+                filterStatus.push('1');
+                filterStatus.push('2');
+            }
+
+            filteredString = filterStatus.toString()
+
+            filterStatusSplit = filteredString.replace(/"/g,'').replace('[', '').replace(']', '');
+            splittedStatus = filterStatusSplit.split(',', '10')
+            arrayToCompare = splittedStatus.map(i=>Number(i))//array of numbers
+
+            var input, filter, table, tr, td, i, txtValue;
+            table = document.getElementById("drivertable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[2];
+                if (td) {
+                    //txtValue = td.textContent || td.innerText;
+                    txtValue = td.textContent || td.innerText;
+
+                    txtValueSplit = txtValue.replace(/"/g,'').replace('[', '').replace(']', '');
+                    splittedValue = txtValueSplit.split(',', '10')
+                    arrayToFilter = splittedValue.map(j=>Number(j))//complete array of numbers
+
+                    let array1 = arrayToCompare;
+                    let array2 = arrayToFilter;
+                    let filteredArray1 = array2.filter(el => array1.includes(el));
+                    //console.log(i+" the number " +filteredArray1)
+
+                    if (filteredArray1.length != 0) {
+                        tr[i].style.display = "";
+                        //console.log("worked")
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+        } */
+
+        function arrayRemove(arr, value) { 
+            return arr.filter(function(ele){ 
+                return ele != value; 
+            });
+        }
+
+        function search() {
+
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("driverNames");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("drivertable");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText; 
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }       
+            }
+        }
+
+        document.getElementById('forChecking').style.display = "block";
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" activated", "");
+            }
+            
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " activated";
+        }
+    </script>
+    
+</body>
+</html>

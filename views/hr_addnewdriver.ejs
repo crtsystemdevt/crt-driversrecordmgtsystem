@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<link rel="stylesheet" href="/header.css">
+<link rel="stylesheet" href="/hr.css">
+<link rel="stylesheet" href="/style.css">
+<title>Add New Driver</title>
+<style>
+    .btn-submit{
+        background-color: #4047B3;
+        font-size: 120%;
+        color: white;
+        border-radius: 5px;
+        border: solid 2px #C5B8B8;
+        padding: 0.5vh;
+        padding-left: 2vh;
+        padding-right: 2vh;
+        margin-bottom: 2vh;
+        transition-duration: 0.4s;
+        
+        margin-right: 3vw;
+    }
+
+    .btn-back{
+        background-color: #F8F8F8;
+        font-size: 120%;
+        color: #4047B3;
+        border-radius: 5px;
+        border: solid 1px #C5B8B8;
+        padding: 0.5vh;
+        padding-left: 2vh;
+        padding-right: 2vh;
+        
+        margin-right: 0.5vw;
+        transition-duration: 0.4s;
+    }
+</style>
+<body>
+
+    <!-- FIXED STICKY HEADER -->
+    <div class="topnav" id="myTopnav">
+        <img src="/images/crt_icon.png" alt="" class="nav_logo" draggable="false">
+        <a href="/hr/home" class="nav_content">Dashboard</a>
+        <a href="/hr/managedrivers" class="active nav_content">Manage Drivers</a>
+        <a href="/hr/viewapplications" class="nav_content">View Applications</a>
+        <a href="javascript:void(0);" style="font-size:30px;" class="icon" onclick="hamburger()">&#9776;</a>
+        <div class="drpdwn">
+            <button class="dropbtn"><%= user_name %>
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="drpdwn-content">
+                <a href="#">Account Settings</a>
+                <a href="#">Logout</a>
+            </div>
+        </div> 
+    </div>
+    <div class="outer-form">
+        <form id="form" action="/hr/addnewdriverpost" method="post" role="form" enctype="multipart/form-data">
+            
+            <!-- INFORMATION SHEET -->
+
+            <h5 class="text-center part_type" id="part_type">TYPE OF PART (WILL BE CHANGED IN THE SCRIPT)</h5> <!-- WILL CHANGED BY THE SCRIPT -->
+
+            <!-- PERSONAL INFORMATION -->
+
+            <div class="form-group row tab">
+                <div class="col-lg-6">
+                    <label for="">First Name</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="firstName" placeholder="First name" name="firstName" value="" onkeypress="return isName(event)" oncopy="return false" onpaste="return false">
+                    <label for="">Middle Name</label>
+                    <input type="text" class="form-control text_box" maxlength="100" oninput="this.className='form-control text_box'" id="" placeholder="Middle name" name="middleName" onkeypress="return isName(event)" oncopy="return false" onpaste="return false">
+                    <label for="">Last Name</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="" placeholder="Last Name" name="lastName" onkeypress="return isName(event)" oncopy="return false" onpaste="return false">
+                    <label for="">Nickname</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="" placeholder="Nickname" name="nickname" onkeypress="return isName(event)" oncopy="return false" onpaste="return false">
+                    <label for="" name="sex">Sex</label> <label class="required">*</label>
+                    <select class="form-select text_box" name="sex">
+                        <option value="male" name="Male">Male</option>
+                        <option value="female" name="Female">Female</option>
+                    </select>
+                    <label for="">Home Address</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="" placeholder="Home Address" name="homeAddress" oncopy="return false" onpaste="return false">
+                    
+                    <label for="">Birthdate</label> <label class="required">*</label>
+                    <input type="date" class="form-control text_box requiredInput" oninput="this.className='form-control text_box requiredInput'" id="birthdate" placeholder="Birthdate" name="birthdate" oncopy="return false" onpaste="return false" onkeypress="return isName(event)">
+
+                    <label for="" name="location">Location/Area</label> <label class="required">*</label>
+                    <select class="form-select text_box" name="location">
+                        <option value="Metro Manila" name="Metro Manila">Metro Manila</option>
+                        <option value="Laguna" name="Laguna">Laguna</option>
+                    </select>
+                </div>
+                
+                <div class="col-lg-6">
+                    <label for="">Personal contact number</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="11" oninput="this.className='form-control text_box requiredInput'" oncopy="return false" onpaste="return false"  onkeypress="return isNumber(event)" pattern="^[0-9]*$" placeholder="Personal contact number" name="personalNumber" oncopy="return false" onpaste="return false">
+                    <label for="">Email Address</label> <label class="required">*</label>
+                    <input type="email" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="email" placeholder="Email address" name="emailAddress">
+                    <label for="">Contact person in case of emergency</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="" placeholder="Contact person in case of emergency" name="contactPerson_Name" onkeypress="return isName(event)" oncopy="return false" onpaste="return false">
+                    
+                    <label for="">Contact person's mobile number</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="11" oninput="this.className='form-control text_box requiredInput'" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" placeholder="Contact person's mobile number" name="contactPerson_Number">
+                    <label for="">Relationship to the contact person</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="" placeholder="Relationship to the contact person" name="contactPerson_Relationship" onkeypress="return isName(event)" oncopy="return false" onpaste="return false">
+                    <label for="">Blood type</label>
+                    <input type="text" class="form-control text_box" id="" maxlength="100" placeholder="Blood type" name="bloodType">
+                    <label for="">Religion</label>
+                    <input type="text" class="form-control text_box" id="" maxlength="100" placeholder="Religion" name="religion">
+                    <label for="">Civil status</label> <label class="required">*</label>
+                    <input type="text" class="form-control text_box requiredInput" maxlength="100" oninput="this.className='form-control text_box requiredInput'" id="" placeholder="Civil status" name="civilStatus" onkeypress="return isName(event)" oncopy="return false" onpaste="return false">
+                    <label for="">Height and Weight</label>
+                    <div class="input-group">                        
+                        <text id="addon">H</text>
+                        <input id="" type="text" class="form-control hw" placeholder="Height in cm" name="height" maxlength="6" oncopy="return false" onpaste="return false" onkeypress="return isFloat(event, this.id)">
+
+                        <text id="addon">W</text>
+                        <input id="" type="text" class="form-control" placeholder="Weight in KG" name="weight" maxlength="6" oncopy="return false" onpaste="return false" onkeypress="return isFloat(event, this.id)">
+                    </div>
+                </div>
+                <div class="alert alert-danger" id="email-info" style="margin-top: 20px;" role="alert">
+                    Invalid Email format!
+                </div>
+            </div>
+
+            <!-- EDUCATIONAL BACKGROUND -->
+
+            <div class="form-group row tab">
+                <div class="col">
+                    <div class="row">
+                        <h3>Elementary</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Name of School" name="e_schoolName">
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" name="e_from" placeholder="Year" maxlength="4" id="e_from" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" name="e_to" placeholder="Year" maxlength="4" id="e_to" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Course/Degree/Grade Completed and Awards Received" name="e_awards">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Secondary</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Name of School" name="s_schoolName">
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" name="s_from" placeholder="Year" maxlength="4" id="s_from" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" name="s_to" placeholder="Year" maxlength="4" id="s_to" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Course/Degree/Grade Completed and Awards Received" name="s_awards">
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="row">
+                        <h3>Collegiate</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Name of School" name="c_schoolName">
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" name="c_from" placeholder="Year" maxlength="4" id="c_from" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" name="c_to" placeholder="Year" maxlength="4" id="c_to" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Course/Degree/Grade Completed and Awards Received" name="c_awards">
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="row">
+                        <h3>Masteral Degree</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Name of School" name="m_schoolName">
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" name="m_from" placeholder="Year" maxlength="4" id="m_from" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" name="m_to" placeholder="Year" maxlength="4" id="m_to" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Course/Degree/Grade Completed and Awards Received" name="m_awards">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Others</h3>
+                        <div class="col-lg-8">
+                            <label for="">Name of School</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Name of School" name="o_schoolName">
+                        </div>
+                        
+                        <div class="col-lg-2">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" name="o_from" placeholder="Year" maxlength="4" id="o_from" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" name="o_to" placeholder="Year" maxlength="4" id="o_to" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        
+                        <div class="col-lg-7">
+                            <label for="">Course/Degree/Grade Completed and Awards Received</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Course/Degree/Grade Completed and Awards Received" name="o_awards">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Special skills and abilities</h3>
+                        <div class="col-lg-10">
+                            <label for="">Other hobbies or skills</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Other hobbies or skills" name="specialSkills">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WORK EXPERIENCE -->
+
+            <div class="form-group row tab">
+                <div class="col">
+                    <div class="row">
+                        <h3>Work #1</h3>
+                        <div class="col-lg-8">
+                            <label for="">Employers and Address</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Employers and Address" name="workEmployer1">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Company Tel.#</label>
+                            <input type="email" class="form-control text_box" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" placeholder="Company Tel.#" name="workNumber1">
+                        </div>                
+                        <div class="col-lg-3">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" name="workFrom1"  placeholder="Year" id="workFrom1" maxlength="4" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" name="workTo1"  placeholder="Year" id="workTo1" maxlength="4" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">Position held</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Position held" name="workPosition1">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Reason for leaving</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Reason for leaving" name="workReasonForLeaving1">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Work #2</h3>
+                        <div class="col-lg-8">
+                            <label for="">Employers and Address</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Employers and Address" name="workEmployer2">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" placeholder="Company Tel.#" name="workNumber2">
+                        </div>                
+                        <div class="col-lg-3">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" id="workFrom2" placeholder="Year" maxlength="4" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" name="workFrom2" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" id="workTo2" placeholder="Year" maxlength="4" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" name="workTo2" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">Position held</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Position held" name="workPosition2">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Reason for leaving</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Reason for leaving" name="workReasonForLeaving2">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Work #3</h3>
+                        <div class="col-lg-8">
+                            <label for="">Employers and Address</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Employers and Address" name="workEmployer3">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" placeholder="Company Tel.#" name="workNumber3">
+                        </div>                
+                        <div class="col-lg-3">
+                            <label for="">From</label>
+                            <input type="text" class="form-control text_box" id="workFrom3" placeholder="Year" maxlength="4" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" name="workFrom3" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-3">
+                            <label for="">To</label>
+                            <input type="text" class="form-control text_box" id="workTo3" placeholder="Year" maxlength="4" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" name="workTo3" onblur="checkYear()" onfocus="checkYear()">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">Position held</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Position held" name="workPosition3">
+                        </div>
+                        <div class="col-lg-12">
+                            <label for="">Reason for leaving</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Reason for leaving" name="workReasonForLeaving3">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAMILY BACKGROUND -->
+
+            <div class="form-group row tab">
+                <div class="alert alert-info" role="alert">
+                    <label class="required">*</label> indicates required field
+                </div>
+                <div class="col">
+                    <div class="row">
+                        <h3>Parents</h3>
+                        <div class="col-lg-8">
+                            <label for="">Father's name</label> <label class="required">*</label>
+                            <input type="text" class="form-control text_box requiredInput" oninput="this.className='form-control text_box requiredInput'" id="" placeholder="Father's name" name="father_name" onkeypress="return isName(event)">
+                        </div>
+                        
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label> <label class="required">*</label>
+                            <input type="date" class="form-control text_box requiredInput" oninput="this.className='form-control text_box requiredInput'" id="father_birthdate" placeholder="Birthdate" name="father_birthdate" onkeypress="return isName(event)">
+                        </div>                    
+                        <div class="col-lg-6">
+                            <label for="">Occupation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Occupation" name="father_occupation">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" placeholder="Company Tel.#" name="father_companyNumber">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">Mother's name</label> <label class="required">*</label>
+                            <input type="text" class="form-control text_box requiredInput" oninput="this.className='form-control text_box requiredInput'" id="" placeholder="Mother's name" name="mother_name" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label> <label class="required">*</label>
+                            <input type="date" class="form-control text_box requiredInput" oninput="this.className='form-control text_box requiredInput'" id="mother_birthdate" placeholder="Birthdate" name="mother_birthdate" onkeypress="return isName(event)">
+                        </div>                    
+                        <div class="col-lg-6">
+                            <label for="">Occupation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Occupation" name="mother_occupation">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" placeholder="Company Tel.#" name="mother_companyNumber">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Sibling/s</h3>
+                        <div class="col-lg-8">
+                            <label for="">1. Brother/Sister's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Brother/Sister's name" name="sibling_name1" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label>
+                            <input type="date" class="form-control text_box" id="sibling_birthdate1" placeholder="Birthdate" name="sibling_birthdate1" onkeypress="return isName(event)">
+                        </div>                    
+                        <div class="col-lg-6">
+                            <label for="">Occupation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Occupation" name="sibling_occupation1">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" placeholder="Company Tel.#" name="sibling_companyNumber1">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">2. Brother/Sister's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Brother/Sister's name" name="sibling_name2" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label>
+                            <input type="date" class="form-control text_box" id="sibling_birthdate2" placeholder="Birthdate" name="sibling_birthdate2" onkeypress="return isName(event)">
+                        </div>                    
+                        <div class="col-lg-6">
+                            <label for="">Occupation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Occupation" name="sibling_occupation2">
+                        </div>
+                        <div class="col-lg-2">
+                            <label for="">Company Tel.#</label>
+                            <input type="text" class="form-control text_box" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)" placeholder="Company Tel.#" name="sibling_companyNumber2">
+                        </div>
+                    </div>
+                    
+                    <hr>
+                    <div class="row">
+                        <h3>Children</h3>
+                        <div class="col-lg-8">
+                            <label for="">1. Child's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Child's name" name="children_name1" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label>
+                            <input type="date" class="form-control text_box" id="children_birthdate1" placeholder="Birthdate" name="children_birthdate1" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">2. Child's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Child's name" name="children_name2" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Birthdate</label>
+                            <input type="date" class="form-control text_box" id="children_birthdate2" placeholder="Birthdate" name="children_birthdate2" onkeypress="return isName(event)">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Person/s working at CRTI known to you.</h3>
+                        <div class="col-lg-8">
+                            <label for="">1. Person's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Person's name" name="personcrt_name1" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Relation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Relation" name="personcrt_relationship1" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">2. Person's name</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Person's name" name="personcrt_name2" onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Relation</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Relation" name="personcrt_relationship2" onkeypress="return isName(event)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LICENSES -->
+
+            <div class="form-group row tab">
+                <div class="col">
+                    <div class="row">
+                        <div class="alert alert-info" role="alert">
+                            <label class="required">*</label> indicates required field
+                        </div>
+                        <h3>License</h3>
+                        <div class="col-lg-8">
+                            <label for="">License Number</label> <label class="required">*</label>
+                            <input type="text" class="form-control text_box requiredInput" id="" placeholder="License Number" name="licenseNumber1" maxlength="30" oninput="this.className='form-control text_box requiredInput'" oncopy="return false" onpaste="return false" onkeypress="return">
+                        </div>
+                        <div class="col-lg-4">
+                            <label for="">Expiry Date</label> <label class="required">*</label>
+                            <input type="date" class="form-control text_box requiredInput" id="licenseExpiry1" placeholder="Expiry Date" name="licenseExpiry1"  maxlength="30" oninput="this.className='form-control text_box requiredInput'" oncopy="return false" onpaste="return false"  onkeypress="return isName(event)">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Rating</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Rating" name="licenseRating1" maxlength="30">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Remarks</label>
+                            <input type="text" class="form-control text_box" id="" placeholder="Remarks" name="licenseRemarks1" maxlength="30">
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="">Type of License</label> <br>
+                            <div class="radio_group">
+                                <input type="radio" class="typeOfLicense" name="licenseType1" value="Professional"> Professional
+                                <input type="radio" checked class="typeOfLicense" name="licenseType1" value="Non-Professional"> Non-professional    
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <label for="">Restriction</label> <br>  
+                            <div class="restriction_group">
+                                <input type="checkbox" id="restriction1" name="restriction1" value="1" checked="checked" class="restriction">
+                                <label for="restriction1"> 1</label>
+                                <input type="checkbox" id="restriction2" name="restriction1" value="2" class="restriction">
+                                <label for="restriction2"> 2</label>
+                                <input type="checkbox" id="restriction3" name="restriction1" value="3" class="restriction">
+                                <label for="restriction3"> 3</label>
+                                <input type="checkbox" id="restriction4" name="restriction1" value="4" class="restriction">
+                                <label for="restriction4"> 4</label>
+                                <input type="checkbox" id="restriction5" name="restriction1" value="5" class="restriction">
+                                <label for="restriction5"> 5</label>
+                                <input type="checkbox" id="restriction6" name="restriction1" value="6" class="restriction">
+                                <label for="restriction6"> 6</label>
+                                <input type="checkbox" id="restriction7" name="restriction1" value="7" class="restriction">
+                                <label for="restriction7"> 7</label>
+                                <input type="checkbox" id="restriction8" name="restriction1" value="8" class="restriction">
+                                <label for="restriction8"> 8</label>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="">Scanned Driver's License</label> <label class="required">*</label>
+                            <input type="file" class="form-control text_box requiredInput" oninput="this.className='form-control text_box requiredInput'" name="license_file1" id="license_file1" accept="image/x-png,image/gif,image/jpeg,.pdf">
+                        </div>
+                    </div>
+                </div>
+            </div> 
+
+            <!-- ATTACHMENTS -->
+
+            <div class="form-group row tab">
+                <div class="col">
+                    <div class="row">
+                        <h3>Attachments</h3>
+                        <div class="col-lg-12">
+                            <label for="">Profile photo</label> <br>
+                            <img class="profile-img" id="blah" src="/images/180.png" alt="Image not found" />
+                            <input type="file" id="profile_photo" class="form-control text_box" placeholder="" onchange="readURL(this)" name="profile_photo" accept="image/x-png,image/gif,image/jpeg">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>ID's and other</h3>
+                        <div class="col-lg-6">
+                            <label for="">1. SSS number</label>
+                            <input type="text" class="form-control text_box" placeholder="SSS number" name="sss_number" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Scanned SSS ID</label>
+                            <input type="file" class="form-control text_box" id="sss_file" name="sss_file" accept="image/x-png,image/gif,image/jpeg,.pdf">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="">2. Pag-IBIG</label>
+                            <input type="text" class="form-control text_box" placeholder="Pag-IBIG ID number" name="pagibig_number" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Scanned Pag-IBIG ID</label>
+                            <input type="file" class="form-control text_box" id="pagibig_file" name="pagibig_file" accept="image/x-png,image/gif,image/jpeg,.pdf">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="">3. TIN number</label>
+                            <input type="text" class="form-control text_box" placeholder="TIN number" name="tin_number" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Scanned TIN ID</label>
+                            <input type="file" class="form-control text_box" id="tin_file" name="tin_file" accept="image/x-png,image/gif,image/jpeg,.pdf">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <label for="">4. PhilHealth ID</label>
+                            <input type="text" class="form-control text_box" placeholder="PhilHealth ID number" name="philhealth_number" oncopy="return false" onpaste="return false" onkeypress="return isNumber(event)">
+                        </div>
+                        <div class="col-lg-6">
+                            <label for="">Scanned PhilHealth ID</label>
+                            <input type="file" class="form-control text_box" id="philhealth_file" name="philhealth_file" accept="image/x-png,image/gif,image/jpeg,.pdf">
+                        </div>
+
+                        <div class="col-lg-8">
+                            <label for="">5. MDR</label>
+                            <input type="file" class="form-control text_box" id="mdr_file" name="mdr_file" accept="image/x-png,image/gif,image/jpeg,.pdf">
+                        </div>
+                        <div class="col-lg-8">
+                            <label for="">6. NBI Clearance</label>
+                            <input type="file" class="form-control text_box" id="nbi_file" name="nbi_file" accept="image/x-png,image/gif,image/jpeg,.pdf">
+                        </div>                    
+                        <div class="col-lg-8">
+                            <label for="">7. Brgy. Clearance</label>
+                            <input type="file" class="form-control text_box" id="brgyclearance_file" name="brgyclearance_file" accept="image/x-png,image/gif,image/jpeg,.pdf">
+                        </div>
+                    </div>
+
+                    <hr>
+                    <div class="row">
+                        <h3>Socials</h3>
+                        <div class="col-lg-8">
+                            <label for="">Facebook</label> <br>
+                            <input type="text" class="form-control text_box" placeholder="Facebook" name="facebook">
+                            <label for="">Viber</label>
+                            <input type="text" class="form-control text_box" placeholder="Viber" name="viber">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- BUTTONS -->
+
+            <div style="overflow:auto;">
+                
+                <div style="float:right;">                
+                    
+                    <button type="button" id="prevBtn" class="btn-back" onclick="nextPrev(-1); topFunction();">&larr; BACK </button>
+                    <button type="button" id="nextBtn" class="btn-submit" onclick="nextPrev(1); topFunction()">NEXT &rarr;</button>
+                </div>
+            </div>
+            
+        </form>
+        <div class="form-bottom text-center">
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+            <span class="step"></span>
+        </div>
+        <!-- <button type="button" id="discardBtn" class="btn-discard" onclick="">DISCARD</button> -->
+        <!-- <a href="/">Want to discard your application?</a> -->
+    </div>
+</body>
+<script>
+    document.getElementById("email-info").style.display = "none";
+    
+    function hamburger() {
+      var x = document.getElementById("myTopnav");
+      if (x.className === "topnav") {
+        x.className += " responsive";
+      } else {
+        x.className = "topnav";
+      }
+    }
+    var currentTab = 0; 
+    showTab(currentTab);
+
+    function showTab(n) {
+    
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "flex";
+    
+
+    //HEADER TITLE
+    if (n == 0) {
+        document.getElementById("prevBtn").style.display = "none";
+        document.getElementById("part_type").innerHTML = "PERSONAL INFORMATION";
+    } else if(n == 1){
+        document.getElementById("part_type").innerHTML = "EDUCATIONAL BACKGROUND AND SKILLS";
+        document.getElementById("prevBtn").style.display = "inline";
+    } else if(n == 2){
+        document.getElementById("part_type").innerHTML = "WORK EXPERIENCE";
+        document.getElementById("prevBtn").style.display = "inline";
+    } else if(n == 3){
+        document.getElementById("part_type").innerHTML = "FAMILY BACKGROUND";
+        document.getElementById("prevBtn").style.display = "inline";
+    } else if(n == 4){
+        document.getElementById("part_type").innerHTML = "LICENSE";
+        document.getElementById("prevBtn").style.display = "inline";
+    } else if(n == 5){
+        document.getElementById("part_type").innerHTML = "ATTACHMENTS AND IDENTIFICATIONS";
+        document.getElementById("prevBtn").style.display = "inline";
+    }
+
+    //BUTTONS
+    if (n == (x.length - 1)) {
+        document.getElementById("nextBtn").innerHTML = "SUBMIT";
+    } else {
+        document.getElementById("nextBtn").innerHTML = "NEXT &rarr;";
+        document.getElementById("nextBtn").disabled = false;
+    }
+
+    fixStepIndicator(n)
+    }
+
+    function nextPrev(n) {
+        var x = document.getElementsByClassName("tab");
+
+        if (n == 1 && !validateForm()) return false;
+        x[currentTab].style.display = "none";
+        currentTab = currentTab + n;
+
+        if (currentTab >= x.length) {
+            if (confirm("This action will make a New Driver. The Status of the Driver will be On Probation.")) {
+                document.getElementById("form").submit();
+            } else {
+                currentTab = currentTab - n;
+            }
+        }
+        showTab(currentTab);
+    }
+
+    function validateForm() { 
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("tab");
+        y = x[currentTab].getElementsByClassName("requiredInput");
+        for (i = 0; i < y.length; i++) {
+            if (y[i].value == "") {
+            y[i].className += " invalid";
+            valid = false;
+            }
+        }
+        var reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+
+        if (reg.test(document.getElementById("email").value) == false){
+            document.getElementById("email").className += " invalid";
+            document.getElementById("email-info").style.display = "";
+            valid = false;
+        } else{
+            document.getElementById("email-info").style.display = "none";
+        }
+        return valid;
+    }
+
+    var mybutton = document.getElementById("prevBtn");
+
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            
+            reader.onload = function(e) {
+                $('#blah').attr('src', e.target.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#profile_photo").change(function() {
+        readURL(this);
+    });
+
+    function fixStepIndicator(n) {
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        x[n].className += " active";
+    }
+
+    function isNumber(evt){
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+    function isLicense(evt){
+        var ch = String.fromCharCode(evt.keyCode);
+        var filter = /[0-9-dD]/;
+        if(!filter.test(ch)){
+            evt.returnValue = false;
+        }
+    }
+
+    //LICENSE 1 VALIDATION
+    function isFloat(evt, id){
+        try{
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+            if(charCode==46){
+                var txt=document.getElementById(id).value;
+                if(!(txt.indexOf(".") > -1)){
+                    return true;
+                }
+            }
+            if (charCode > 31 && (charCode < 48 || charCode > 57) ) return false;
+
+            return true;
+        }catch(w){
+        
+        }
+    }
+
+    function isName(e){
+    try {
+        if (window.event) {
+            var charCode = window.event.keyCode;
+        }
+        else if (e) {
+            var charCode = e.which;
+        }
+        else { return true; }
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32)
+            return true;
+        else
+            return false;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+    }
+
+    var today = new Date();
+    var todaydd = today.getDate();
+    var todaymm = today.getMonth()+1; //January is 0!
+    var todayyyyy = today.getFullYear();
+    if(todaydd < 10){
+    todaydd = '0' + todaydd
+    } 
+    if(todaymm < 10){
+    todaymm = '0' + todaymm
+    } 
+    today = todayyyyy + '-' + todaymm + '-' + todaydd;
+
+    document.getElementById("sibling_birthdate1").setAttribute("max", today);
+    document.getElementById("sibling_birthdate2").setAttribute("max", today);
+    document.getElementById("children_birthdate1").setAttribute("max", today);
+    document.getElementById("children_birthdate2").setAttribute("max", today);
+
+    //YEARS
+    //EDUCATIONAL BACKGROUND YEARS
+    function checkYear(){
+    if(document.getElementById("m_to").value < document.getElementById("m_from").value){
+        document.getElementById("m_to").value = document.getElementById("m_from").value;
+    }
+    if(document.getElementById("c_to").value < document.getElementById("c_from").value){
+        document.getElementById("c_to").value = document.getElementById("c_from").value;
+    }
+    if(document.getElementById("s_to").value < document.getElementById("s_from").value){
+        document.getElementById("s_to").value = document.getElementById("s_from").value;
+    }
+    if(document.getElementById("e_to").value < document.getElementById("e_from").value){
+        document.getElementById("e_to").value = document.getElementById("e_from").value;
+    }
+    if(document.getElementById("o_to").value < document.getElementById("o_from").value){
+        document.getElementById("o_to").value = document.getElementById("o_from").value;
+    }
+    if(document.getElementById("workTo1").value < document.getElementById("workFrom1").value){
+        document.getElementById("workTo1").value = document.getElementById("workFrom1").value;
+    }
+    if(document.getElementById("workTo2").value < document.getElementById("workFrom2").value){
+        document.getElementById("workTo2").value = document.getElementById("workFrom2").value;
+    }
+    if(document.getElementById("workTo3").value < document.getElementById("workFrom3").value){
+        document.getElementById("workTo3").value = document.getElementById("workFrom3").value;
+    }
+    }
+
+    //LICENSE 1 VALIDATION
+
+    $('#license_file1').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("license_file1").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("license_file1").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("license_file1").value = "";
+            return false;
+        }
+    }
+    });
+
+
+    //PROFILE PHOTO VALIDATION
+    $('#profile_photo').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("profile_photo").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("profile_photo").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("profile_photo").value = "";
+            return false;
+        }
+    }
+    });
+
+    //SSS FILE
+    $('#sss_file').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("sss_file").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("sss_file").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("sss_file").value = "";
+            return false;
+        }
+    }
+    });
+
+    //PAGIBIG FILE
+    $('#pagibig_file').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("pagibig_file").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("pagibig_file").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("pagibig_file").value = "";
+            return false;
+        }
+    }
+    });
+
+    //TIN FILE
+    $('#tin_file').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("tin_file").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("tin_file").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("tin_file").value = "";
+            return false;
+        }
+    }
+    });
+
+    //PHILHEALTH FILE
+    $('#philhealth_file').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("philhealth_file").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("philhealth_file").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("philhealth_file").value = "";
+            return false;
+        }
+    }
+    });
+
+    //MDR FILE
+    $('#mdr_file').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("mdr_file").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("mdr_file").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("mdr_file").value = "";
+            return false;
+        }
+    }
+    });
+
+    //NBI FILE
+    $('#nbi_file').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("nbi_file").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("nbi_file").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("nbi_file").value = "";
+            return false;
+        }
+    }
+    });
+
+    //BRGY CLEARANCE FILE
+    $('#brgyclearance_file').on('change', function() {
+    const size = (this.files[0].size / 1024 / 1024).toFixed(2);
+
+    filePath = document.getElementById("brgyclearance_file").value;
+
+    if (size > 5) {
+        alert("File size must not be greater than 10mb");
+        document.getElementById("brgyclearance_file").value = "";
+    } else {
+        var allowedExtensions = /(\.jpg|\.jpeg|\.png|\.pdf)$/i;
+                
+        if (!allowedExtensions.exec(filePath)) {
+            alert('Invalid file type');
+            document.getElementById("brgyclearance_file").value = "";
+            return false;
+        }
+    }
+    });
+
+
+    //MAXIMUM FOR BIRTHDAY
+    var birthdate = new Date();
+    var dd = birthdate.getDate();
+    var mm = birthdate.getMonth()+1; //January is 0!
+    var yyyy = birthdate.getFullYear()-18;
+    if(dd < 10){
+    dd = '0' + dd
+    } 
+    if(mm < 10){
+    mm = '0' + mm
+    } 
+    birthdate = yyyy + '-' + mm + '-' + dd;
+
+    //MINIMUM FOR BIRTHDAY
+    var mindate = new Date();
+    var mindd = mindate.getDate();
+    var minmm = mindate.getMonth()+1;
+    var minyyyy = mindate.getFullYear()-60;
+
+    if(mindd < 10){
+    mindd = '0' + mindd
+    }
+
+    if(minmm < 10){
+    minmm = '0' + minmm;
+    }
+    mindate = minyyyy + '-' + minmm + '-' + mindd;
+
+    document.getElementById("birthdate").setAttribute("max", birthdate);
+    document.getElementById("birthdate").setAttribute("min", mindate);
+    document.getElementById("father_birthdate").setAttribute("max", birthdate);
+    document.getElementById("father_birthdate").setAttribute("min", mindate);
+    document.getElementById("mother_birthdate").setAttribute("max", birthdate);
+    document.getElementById("mother_birthdate").setAttribute("min", mindate);
+
+    var licensedate = new Date();
+    var licensedd = licensedate.getDate();
+    var licensemm = licensedate.getMonth()+2;
+    var licenseyyyy = licensedate.getFullYear();
+
+    if(licensedd < 10){
+    licensedd = '0' + licensedd
+    }
+
+    if(licensemm < 10){
+    licensemm = '0' + licensemm;
+    }
+    licensedate = licenseyyyy + '-' + licensemm + '-' + licensedd;
+    console.log(licensedate)
+    document.getElementById("licenseExpiry1").setAttribute("min", licensedate);
+</script>
+</html>

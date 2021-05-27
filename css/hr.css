@@ -1,0 +1,14 @@
+.content{
+    margin: auto;
+    margin-top: 100px;
+    width: 800px;
+}
+
+.btn-danger:hover, .btn-submit:hover, .btn-addnewdriver:hover{
+    opacity: 0.8;
+  }
+
+  .container{
+      margin-top: 100px;
+      margin-bottom: 150px;
+  }

@@ -1,0 +1,131 @@
+.counter-group{
+    margin-top: 20px;
+}
+
+.inner-group-counter{
+    margin: auto;
+}
+
+.card-counter{
+    background-color: #fff;
+    margin: 20px;
+    width: 250px;
+    height: 120px;
+    display: flex;
+}
+
+.main-number{
+    font-size: 4em;
+    height: auto;
+    margin: auto;
+}
+
+.main-title{
+    font-size: 1.2em;
+    width: 180px;
+    height: auto;
+    display: flex;
+    margin: auto;
+    margin-left: 10px;
+}
+
+.leftBlue{
+    height: 120px;
+    background-color: #4047B3;
+    width: 10px;
+    margin-left: -12px;
+}
+
+/* TABLE DESIGN */
+
+#birthdaysTable{
+    width: 100%;
+    height: auto;
+    background-color: #fff;
+}
+
+#licenseTable{
+    width: 100%;
+    height: auto;
+    margin: 0;
+    background-color: #fff;
+}
+
+.upcomingTables{
+    margin-top: 100px;
+}
+
+thead{
+    background-color:#4047B3;
+    color: #fff;
+    position: sticky;
+    position: sticky; 
+    top: 0;
+}
+
+/* PIE CHART */
+#applicationsChart, #driverStatusChart, #applicationsChartNoData, #driverStatusChartNoData {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.1), 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.table_percentage{
+    max-height: 300px;
+}
+
+.col-lg-3{
+    margin-left: 20px;
+}
+
+.container-fluid{
+    margin-bottom: 50px;
+}
+
+.systemTitle{
+    margin-top: 10px;
+    font-size: 1.5em;
+}
+
+.previousbirthdays{
+    color: #4047B3;
+    position: absolute;
+    margin-bottom: 10px;
+    bottom: 0;
+}
+
+.previousbirthdays:hover{
+    color: #9c9c9c;
+    transition: 0.3s;
+}
+
+caption{
+    caption-side: top;
+    color: black;
+    text-align: center;
+}
+
+.card-table1{
+    background-color: white;
+    padding: 20px;
+    padding-top: 0px;
+    width: 20%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.1), 0px 2px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    
+    overflow: auto;
+}
+
+.card-table2{
+    background-color: white;
+    padding: 20px;
+    padding-top: 0px;
+    width: 20%;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0px 4px rgba(0, 0, 0, 0.1), 0px 2px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    height: auto;
+}
